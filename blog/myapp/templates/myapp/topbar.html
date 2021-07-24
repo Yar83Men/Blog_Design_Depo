@@ -1,0 +1,39 @@
+<div class="container m-3">
+    <div class="row">
+        <div class="col-md-4">
+            <p> Сортировка по дате : {{ choice }} </p>
+            <form class="d-flex" action="{% url 'sort_by_date' %}" method="POST">
+                {% csrf_token %}
+                <select name="time">
+                    <option value="new">Сначала новые</option>
+                    <option value="old">Сначала старые</option>
+                </select>
+                <button class="btn btn-outline-secondary" type="submit">Поиск</button>
+            </form>
+        </div>
+        <div class="col-md-4">
+            <p> Сортировка по категории : {{ cat_name }} </p>
+            <form class="d-flex" action="{% url 'sort_by_category' %}" method="POST">
+                {% csrf_token %}
+                <select name="category">
+                    {% for cat in categories %}
+                    <option value="{{ cat.id }}">{{ cat }}</option>
+                    {% endfor %}
+                </select>
+                <button class="btn btn-outline-secondary" type="submit">Поиск</button>
+            </form>
+        </div>
+        <div class="col-md-4">
+            <p> Сортировка по тегу : {{ tag_name }}</p>
+            <form class="d-flex" action="{% url 'sort_by_tag' %}" method="POST">
+                {% csrf_token %}
+                <select name="tag">
+                    {% for tag in tags %}
+                    <option value="{{ tag.id }}">{{ tag.name }}</option>
+                    {% endfor %}
+                </select>
+                <button class="btn btn-outline-secondary" type="submit">Поиск</button>
+            </form>
+        </div>
+    </div>
+</div>
